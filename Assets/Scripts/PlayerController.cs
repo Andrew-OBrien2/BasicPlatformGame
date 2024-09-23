@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
         {
             numJumps = 1;
         }
+        else if (collision.gameObject.CompareTag("Bat"))
+        {
+            SceneManager.LoadScene("Level01");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
