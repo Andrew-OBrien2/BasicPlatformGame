@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private float inputHorizontal;
     private int maxNumJumps;
     private int numJumps;
+    public GameObject weaponHoldLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +101,16 @@ public class PlayerController : MonoBehaviour
         {
             //restart level
             SceneManager.LoadScene("Level01");
+        }
+        else if (collision.gameObject.CompareTag("Weapon"))
+        {
+            collision.gameObject.transform.SetParent(weaponHoldLocation.transform);
+            //set the rotations of the weapon to match the player rotation
+            collision.gameObject.transform.rotation = weaponHoldLocation.transform.rotation;
+            //set location
+            collision.gameObject.transform.position = weaponHoldLocation.transform.position;
+
+            collision.gameObject.GetComponent<FireWeapon>().setWeaponEquipped(true);
         }
     }
 }

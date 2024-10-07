@@ -9,6 +9,7 @@ TagManager:
   - OB
   - SpaceSuit
   - Bat
+  - Weapon
   layers:
   - Default
   - TransparentFX
