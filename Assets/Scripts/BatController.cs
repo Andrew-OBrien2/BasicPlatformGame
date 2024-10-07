@@ -9,6 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     private Vector2 playerLocation;
     public float speed;
     public float bounceForce;
+    public float health;
 
     void Start()
     {
@@ -24,11 +25,26 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Collision " + collision.gameObject.name);
         if(collision.gameObject.CompareTag("Player"))
         {
             Destroy(this.gameObject);
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.velocity = new Vector2(rb.velocity.x, bounceForce);
+        }
+        else if (collision.gameObject.CompareTag("Bullet"))
+        {
+            MoveBullet mb = collision.gameObject.GetComponent<MoveBullet>();
+            health -= mb.getBulletDamage();
+            isDead();
+        }
+    }
+
+    private void isDead()
+    {
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
