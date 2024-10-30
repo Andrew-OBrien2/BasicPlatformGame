@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private int maxNumJumps;
     private int numJumps;
     public GameObject weaponHoldLocation;
+    private Animator playerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         //because the rigidobdy2d is attached to the player and this script is
         //also attached to the player
         playerRigidBody = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
 
         maxNumJumps = 1;
         numJumps = 1;
@@ -51,9 +53,14 @@ public class PlayerController : MonoBehaviour
 
         playerRigidBody.velocity = new Vector2(movementSpeed * inputHorizontal, playerRigidBody.velocity.y);
 
-        if(inputHorizontal!= 0)
+        if (inputHorizontal != 0)
         {
+            playerAnimator.SetBool("isWalking", true);
             flipPlayerSprite(inputHorizontal);
+        }
+        else
+        {
+            playerAnimator.SetBool("isWalking", false);
         }
     }
 
