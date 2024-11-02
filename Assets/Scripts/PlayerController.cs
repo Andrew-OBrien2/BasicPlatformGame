@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, jumpForce);
             numJumps++;
-            playerAnimator.SetBool("isJumping", true);
+            playerAnimator.Play("Jump");
         }
     }
 
